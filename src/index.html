@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Calendar Dashboard</title>
+    <link rel="stylesheet" href="./assets/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">Tasks</div>
+                <div class="nav-buttons">
+                    <button class="btn btn-primary" onclick="openForm()">+ Create</button>
+                    <button class="btn">Today</button>
+                    <button class="btn">←</button>
+                    <button class="btn">→</button>
+                    <span style="margin-left: 8px;">November 2024</span>
+                </div>
+            </div>
+            <div class="view-options">
+                <button class="btn">Week</button>
+                <button class="btn">Month</button>
+            </div>
+        </header>
+
+        <div class="calendar-header">
+            <div class="day-header"></div>
+        </div>
+
+        <div class="calendar-grid">
+            <div class="time-column">
+                <div class="time-slot">12 AM</div>
+                <div class="time-slot">1 AM</div>
+                <div class="time-slot">2 AM</div>
+                <div class="time-slot">3 AM</div>
+                <div class="time-slot">4 AM</div>
+                <div class="time-slot">5 AM</div>
+                <div class="time-slot">6 AM</div>
+                <div class="time-slot">7 AM</div>
+                <div class="time-slot">8 AM</div>
+                <div class="time-slot">9 AM</div>
+                <div class="time-slot">10 AM</div>
+                <div class="time-slot">11 AM</div>
+                <div class="time-slot">12 PM</div>
+                <div class="time-slot">1 PM</div>
+                <div class="time-slot">2 PM</div>
+                <div class="time-slot">3 PM</div>
+                <div class="time-slot">4 PM</div>
+                <div class="time-slot">5 PM</div>
+                <div class="time-slot">6 PM</div>
+                <div class="time-slot">7 PM</div>
+                <div class="time-slot">8 PM</div>
+                <div class="time-slot">9 PM</div>
+                <div class="time-slot">10 PM</div>
+                <div class="time-slot">11 PM</div>
+            </div>
+            <!-- <div class="day-column"></div>
+            <div class="day-column"></div>
+            <div class="day-column"></div>
+            <div class="day-column">
+                <div class="task-event blue" style="top: 540px; height: 60px;">
+                    ⏰ Team Meeting
+                </div>
+                <div class="task-event green" style="top: 660px; height: 90px;">
+                    📝 Project Review
+                </div>
+                <div class="current-time-line" style="top: 720px;">
+                    <div class="current-time-marker"></div>
+                </div>
+            </div>
+            <div class="day-column">
+                <div class="task-event purple" style="top: 480px; height: 120px;">
+                    🎯 Client Presentation
+                </div>
+            </div>
+            <div class="day-column">
+                <div class="task-event red" style="top: 600px; height: 60px;">
+                    📊 Weekly Report
+                </div>
+            </div>
+            <div class="day-column"></div> -->
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="mini-calendar">
+            <!-- Mini calendar would go here -->
+        </div>
+        <div class="task-list">
+            <h3 style="margin-bottom: 12px;">Upcoming Tasks</h3>
+            <div class="task-list-item">
+                <div class="task-dot" style="background: #4285f4;"></div>
+                <div>Team Meeting</div>
+            </div>
+            <div class="task-list-item">
+                <div class="task-dot" style="background: #0f9d58;"></div>
+                <div>Project Review</div>
+            </div>
+            <div class="task-list-item">
+                <div class="task-dot" style="background: #a142f4;"></div>
+                <div>Client Presentation</div>
+            </div>
+            <div class="task-list-item">
+                <div class="task-dot" style="background: #ea4335;"></div>
+                <div>Weekly Report</div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="modal-overlay hide">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Create New Task</h2>
+                <button class="close-button" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="taskForm">
+                <div class="modal-body">
+                    <!-- Task Name -->
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <input type="text" id="taskName" class="form-control" required>
+                    </div>
+
+                    <!-- Day Selection -->
+                    <div class="form-group">
+                        <label>Day</label>
+                        <div class="days-group">
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-sun" value="sunday">
+                                <label class="day-label" for="day-sun">Sun</label>
+                            </div>
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-mon" value="monday">
+                                <label class="day-label" for="day-mon">Mon</label>
+                            </div>
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-tue" value="tuesday">
+                                <label class="day-label" for="day-tue">Tue</label>
+                            </div>
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-wed" value="wednesday">
+                                <label class="day-label" for="day-wed">Wed</label>
+                            </div>
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-thu" value="thursday">
+                                <label class="day-label" for="day-thu">Thu</label>
+                            </div>
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-fri" value="friday">
+                                <label class="day-label" for="day-fri">Fri</label>
+                            </div>
+                            <div class="day-option">
+                                <input type="radio" name="day" id="day-sat" value="saturday">
+                                <label class="day-label" for="day-sat">Sat</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Selection -->
+                    <div class="form-group">
+                        <label>Time</label>
+                        <div class="time-group">
+                            <div class="time-input">
+                                <select id="startHour" required>
+                                    <option value="">Hour</option>
+                                    <option value="00">00</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                                <select id="startMinute" required>
+                                    <option value="">Min</option>
+                                    <option value="00">00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+                            </div>
+                            <span>to</span>
+                            <div class="time-input">
+                                <select id="endHour" required>
+                                    <option value="">Hour</option>
+                                    <option value="00">00</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                                <select id="endMinute" required>
+                                    <option value="">Min</option>
+                                    <option value="00">00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="form-group">
+                        <label>Color</label>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background: #4285f4;" data-color="blue"></div>
+                            <div class="color-option" style="background: #0f9d58;" data-color="green"></div>
+                            <div class="color-option" style="background: #db4437;" data-color="red"></div>
+                            <div class="color-option" style="background: #f4b400;" data-color="yellow"></div>
+                            <div class="color-option" style="background: #9334e6;" data-color="purple"></div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" id="cancelButton">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+    <script src="./handlers/events/formHandler.js"></script>
+</body>
+</html>

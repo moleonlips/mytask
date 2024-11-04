@@ -1,0 +1,376 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #f8f9fa;
+}
+
+.btn-primary {
+    background: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #1557b0;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: 100px repeat(7, 1fr);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.day-header {
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #70757a;
+}
+
+.day-number {
+    font-size: 26px;
+    font-weight: normal;
+    margin-top: 5px;
+    color: #333;
+}
+
+.current-day .day-number {
+    background: #1a73e8;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: 100px repeat(7, 1fr);
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    background: #fff;
+}
+
+.time-column {
+    border-right: 1px solid #e0e0e0;
+}
+
+.time-slot {
+    height: 60px;
+    padding: 0 10px;
+    text-align: right;
+    color: #70757a;
+    font-size: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.day-column {
+    border-right: 1px solid #e0e0e0;
+    position: relative;
+}
+
+.task-event {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: white;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.task-event.blue {
+    background: #4285f4;
+}
+
+.task-event.green {
+    background: #0f9d58;
+}
+
+.task-event.red {
+    background: #ea4335;
+}
+
+.task-event.purple {
+    background: #a142f4;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    width: 265px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    padding: 16px;
+}
+
+.mini-calendar {
+    margin-bottom: 20px;
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-list-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.task-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.current-time-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 2px solid #ea4335;
+    z-index: 1;
+}
+
+.current-time-marker {
+    width: 12px;
+    height: 12px;
+    background: #ea4335;
+    border-radius: 50%;
+    position: absolute;
+    left: -6px;
+    top: -7px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 95%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a73e8;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.days-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.day-option {
+    position: relative;
+}
+
+.day-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.day-label {
+    display: block;
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.day-option input[type="radio"]:checked + .day-label {
+    background: #1a73e8;
+    color: white;
+    border-color: #1a73e8;
+}
+
+.time-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.time-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.time-input select {
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.color-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.color-option {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.color-option.selected {
+    border-color: #333;
+}
+
+.modal-footer {
+    padding: 16px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #1557b0;
+}
+
+.btn-secondary:hover {
+    background: #f8f9fa;
+}
+
+.hide {
+    display: none !important;
+}
