@@ -28,7 +28,7 @@ document.getElementById('taskForm').addEventListener('submit', (e) => {
         day: document.querySelector('input[name="day"]:checked').value,
         startTime: `${document.getElementById('startHour').value}:${document.getElementById('startMinute').value}`,
         endTime: `${document.getElementById('endHour').value}:${document.getElementById('endMinute').value}`,
-        color: document.querySelector('.color-option.selected').dataset.color,
+        color: document.querySelector('.color-option.selected').dataset.color, // hay!
         description: document.getElementById('description').value
     };
 
