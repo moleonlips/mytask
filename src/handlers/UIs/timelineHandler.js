@@ -105,19 +105,41 @@ function calendarGridHandler() {
     }, 10);
 
     // loop days of week and append day collumns
-    thisWeek().forEach((ele) => {
+    thisWeek().forEach((ele, index) => {
         let dayColumn = document.createElement('div');
         dayColumn.className += 'day-column';
 
         if(ele.isCurrent) dayColumn.appendChild(currentTimeLine);
+
+        let scrollTop = 0;
+
+        // bat su kien scroll de lay chieu cao phan noi dung da scrool doc
+        calendarGrid.addEventListener('scroll', (event) => {
+            scrollTop = event.target.scrollTop
+        })
+
+        dayColumn.addEventListener('click', (event) => {
+            
+            let clientY = event.clientY + scrollTop /// vi tri click
+            let offsetTop = event.target.offsetTop /// khoang cach tu phan tu duoc chon den top-page
+            let oneHour = event.target.clientHeight / 24 // 1h = allday / 24 (all day = day column height = event.target.clientHeight)
+            let hourChoosed = (clientY - offsetTop) / oneHour;
+
+            console.log('>>> check hour was choosed:', Math.floor(hourChoosed));
+        })
 
         // dashboard handler
         calendarGrid.appendChild(dayColumn);
     })
 }
 
+function loaded() {
+    return true;
+}
+
 // DOM handler
 export function timelineHandler () {
     calendarHeaderHandler();
     calendarGridHandler();
+    loaded();
 }

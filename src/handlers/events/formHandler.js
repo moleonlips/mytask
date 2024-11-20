@@ -1,4 +1,9 @@
+let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+
 let modalOverlay = document.getElementsByClassName('modal-overlay')[0];
+
+
 
 function closeModal() {
     modalOverlay.className = 'hide';
@@ -21,7 +26,7 @@ colorOptions.forEach(option => {
 
 document.getElementById('taskForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     // Get form values
     const taskData = {
         name: document.getElementById('taskName').value,
