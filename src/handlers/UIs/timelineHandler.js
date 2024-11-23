@@ -4,23 +4,20 @@ const thisWeek = () => {
 
     function getbigestSunPassed() { // lay ve ngay chu nhat gan nhat
         let curDay = new Date().getDay();
-        if (curDay > 0) {
-            let intDate = new Date() * 1 - (1000 * 60 * 60 * 24 * curDay)
-            let bigestSun = new Date(intDate)
-            return bigestSun
-        }
-        return curDay;
+        let intDate = new Date() * 1 - (1000 * 60 * 60 * 24 * curDay); // ngay hien tai tru di so ngay da qua, tinh tu chu nhat gan nhat
+        let bigestSun = new Date(intDate);
+        return bigestSun;
     }
-    
+
     function get6nextdays(day) { // lay ve ngay chi dinh va 6 ngay tiep theo
         let arr = [];
-        arr.push(new Date(day));
-        let dayConvert = new Date(day) * 1; // ep kieu tu Date to number
+        arr.push(new Date(day)); // the first element of array is latest sunday for default.
+        let dayConvert = new Date(day) * 1; // type converting from date to number.
         for (let i = 1; i <= 6; i++) {
             /**
              * 1 ngay 
              * = 24 (h) 
-             * = 24 * 60 (p) 
+             * = 24 * 60 (m) 
              * = 24 * 60 * 60 (s) 
              * = 24 * 60 * 60 * 1000 (ms)
              */
@@ -28,7 +25,7 @@ const thisWeek = () => {
             let dayi = new Date(dayConvert + index) // tinh ra ngay sau ngay input
             arr.push(dayi);
         }
-        
+
         arr = arr.map((item) => {
             return {
                 date: new Date(item).getDate(),
@@ -36,10 +33,10 @@ const thisWeek = () => {
                 isCurrent: new Date().getDate() == item.getDate() ? true : false
             }
         })
-    
+
         return arr;
     }
-    
+
     // new Date(value: number, string, date): Date;
     /**
      * Doi tuong Date, khi chay doc lap se co chuc nang nhu 1 ham, nhan vao 1 so, chuoi hoac 1 other date
@@ -55,16 +52,16 @@ function calendarHeaderHandler() {
     thisWeek().forEach((ele) => {
         // header handler
         let dayHeader = document.createElement('div');
-        dayHeader.className += ele.isCurrent? 'day-header current-day': 'day-header';
-    
+        dayHeader.className += ele.isCurrent ? 'day-header current-day' : 'day-header';
+
         let dayName = document.createElement('div');
         dayName.className += 'day-name';
         dayName.innerHTML = ele.day
-    
+
         let dayNumber = document.createElement('div');
         dayNumber.className += 'day-number';
         dayNumber.innerHTML = ele.date
-    
+
         dayHeader.appendChild(dayName);
         dayHeader.appendChild(dayNumber);
 
@@ -79,7 +76,7 @@ function clocking() {
     let aDay = timeColumn.clientHeight;
     let time = new Date();
     let aHour = aDay / 24;
-    
+
     return aHour * time.getHours() + (aHour / 60 * time.getMinutes()) + (aHour / 3600 * time.getSeconds());
 }
 
@@ -109,7 +106,7 @@ function calendarGridHandler() {
         let dayColumn = document.createElement('div');
         dayColumn.className += 'day-column';
 
-        if(ele.isCurrent) dayColumn.appendChild(currentTimeLine);
+        if (ele.isCurrent) dayColumn.appendChild(currentTimeLine);
 
         let scrollTop = 0;
 
@@ -119,13 +116,19 @@ function calendarGridHandler() {
         })
 
         dayColumn.addEventListener('click', (event) => {
-            
+
+            let oneHour = event.target.clientHeight / 24 // 1h = allday / 24 (all day = day column height = event.target.clientHeight)
             let clientY = event.clientY + scrollTop /// vi tri click
             let offsetTop = event.target.offsetTop /// khoang cach tu phan tu duoc chon den top-page
-            let oneHour = event.target.clientHeight / 24 // 1h = allday / 24 (all day = day column height = event.target.clientHeight)
-            let hourChoosed = (clientY - offsetTop) / oneHour;
+            let hourChoosed = Math.floor((clientY - offsetTop) / oneHour);
 
-            console.log('>>> check hour was choosed:', Math.floor(hourChoosed));
+            let hourInput = document.getElementById('startHour');
+            hourInput.value = hourChoosed;
+
+            let modalOverlay = document.getElementsByClassName('modal-create')[0];
+
+            modalOverlay.className = 'modal-create modal-overlay';
+
         })
 
         // dashboard handler
@@ -138,7 +141,7 @@ function loaded() {
 }
 
 // DOM handler
-export function timelineHandler () {
+export function timelineHandler() {
     calendarHeaderHandler();
     calendarGridHandler();
     loaded();

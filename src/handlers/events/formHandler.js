@@ -1,16 +1,19 @@
 let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
-let modalOverlay = document.getElementsByClassName('modal-overlay')[0];
+let modalOverlay = document.getElementsByClassName('modal-create')[0];
 
 
 
 function closeModal() {
-    modalOverlay.className = 'hide';
+    console.log('>> modal closed!');
+    modalOverlay.className = 'modal-create hide';
 }
 
-function openForm() {
-    modalOverlay.className = 'modal-overlay';
+function openForm(hour) {
+    let hourInput = document.getElementById('startHour');
+    hourInput.value = hour? hour: 0;
+    modalOverlay.className = 'modal-create modal-overlay';
 }
 
 // Color selection
