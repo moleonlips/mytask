@@ -96,7 +96,7 @@ function calendarGridHandler() {
 
     // set marker posotion for default
     currentTimeLine.setAttribute('style', `top: ${clocking()}px`);
-    
+
     // every single millisecond, reset marker posotion
     setInterval(() => {
         currentTimeLine.setAttribute('style', `top: ${clocking()}px`);
@@ -142,13 +142,8 @@ function calendarGridHandler() {
     })
 }
 
-function loaded() {
-    return true;
-}
-
 // DOM handler
 export function timelineHandler() {
     calendarHeaderHandler();
     calendarGridHandler();
-    loaded();
 }

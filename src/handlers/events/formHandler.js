@@ -6,7 +6,9 @@ let modalOverlay = document.getElementsByClassName('modal-create')[0];
 
 
 function closeModal() {
-    console.log('>> modal closed!');
+    let taskForm = document.querySelector('#taskForm');
+    taskForm.reset();
+    
     modalOverlay.className = 'modal-create hide';
 }
 
