@@ -96,13 +96,14 @@ function calendarGridHandler() {
 
     // set marker posotion for default
     currentTimeLine.setAttribute('style', `top: ${clocking()}px`);
+    
     // every single millisecond, reset marker posotion
     setInterval(() => {
         currentTimeLine.setAttribute('style', `top: ${clocking()}px`);
     }, 10);
 
     // loop days of week and append day collumns
-    thisWeek().forEach((ele, index) => {
+    thisWeek().forEach((ele, index) => { // indexes are days of the week, begin at 0 (sunday).
         let dayColumn = document.createElement('div');
         dayColumn.className += 'day-column';
 
@@ -120,10 +121,15 @@ function calendarGridHandler() {
             let oneHour = event.target.clientHeight / 24 // 1h = allday / 24 (all day = day column height = event.target.clientHeight)
             let clientY = event.clientY + scrollTop /// vi tri click
             let offsetTop = event.target.offsetTop /// khoang cach tu phan tu duoc chon den top-page
+            
+            // get hour value when click each other position on day column.
             let hourChoosed = Math.floor((clientY - offsetTop) / oneHour);
-
             let hourInput = document.getElementById('startHour');
             hourInput.value = hourChoosed;
+            
+            // get day value when click into day column.
+            let dayChoosed = document.getElementsByClassName('day-radio')[index];
+            dayChoosed.checked = true;            
 
             let modalOverlay = document.getElementsByClassName('modal-create')[0];
 
